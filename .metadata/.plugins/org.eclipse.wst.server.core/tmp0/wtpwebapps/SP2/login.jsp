@@ -10,7 +10,7 @@
 	<table width=600 align=center border=1>
 		<tr height=100><%@include file="title.jsp"%></tr>
 	</table>
-	<form action="LoginController">
+	<form action="LoginController" method=POST>
 		<table align=center border=1>
 			<tr>
 				<td>帳號</td>
