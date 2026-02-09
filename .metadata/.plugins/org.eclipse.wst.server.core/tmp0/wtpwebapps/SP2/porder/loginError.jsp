@@ -10,7 +10,7 @@
 	<table width=600 align=center border=1>
 		<tr><%@include file="../title.jsp"%></tr>
 	</table>
-	<table>
+	<table align=center>
 		<tr algin=center>
 			<td>查無此會員</td>
 		</tr>

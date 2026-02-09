@@ -10,11 +10,11 @@
 <body bgcolor="#faebd7">
 	<table width="100%" border="2" align="center" height=300>
 		<tr style="opacity: 0.5;">
-			<%@include file="title.jsp" %>
+			<%@include file="title.jsp"%> <!-- 首頁檔案 -->
 		</tr>
 		<tr align=center>
-			<td href="login.jsp" ><a href=login.jsp style="color:brown">登入</a></td>
-			<td>註冊</td>
+			<td><a href=login.jsp style="color: brown">登入</a></td>
+			<td><a href="addMember.jsp">註冊</a></td>
 		</tr>
 	</table>
 	<table width="100%" border="2" height=700>

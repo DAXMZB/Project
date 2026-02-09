@@ -14,7 +14,7 @@ public class memberDaoImpl implements memberDao {
 	public void add(member m) {
 		// TODO Auto-generated method stub
 		Connection conn = DbConnection.getdb();
-		String SQL = "Insert into member(memberNo,username,password,name,address,phone,mobile values(?,?,?,?,?,?,?)";
+		String SQL = "Insert into member(memberNo,username,password,name,address,phone,mobile) values(?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement ps = conn.prepareStatement(SQL);
 			ps.setString(1, m.getMemberNo());
@@ -43,7 +43,7 @@ public class memberDaoImpl implements memberDao {
 	public member queryUser(String username, String password) {
 		// TODO Auto-generated method stub
 		Connection conn = DbConnection.getdb();
-		String SQL = "select * from member where username=? password=?";
+		String SQL = "select * from member where username=? and password=?";
 		member m = null;
 		try {
 			PreparedStatement ps = conn.prepareStatement(SQL);
@@ -59,6 +59,7 @@ public class memberDaoImpl implements memberDao {
 				m.setName(rs.getString("name"));
 				m.setAddress(rs.getString("address"));
 				m.setPhone(rs.getString("phone"));
+				m.setMobile(rs.getString("mobile"));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -78,9 +79,8 @@ public class memberDaoImpl implements memberDao {
 			PreparedStatement ps = conn.prepareStatement(SQL);
 			ps.setString(1, username);
 			ResultSet rs = ps.executeQuery();
-			if(rs.next())
-			{
-				x=true;
+			if (rs.next()) {
+				x = true;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
