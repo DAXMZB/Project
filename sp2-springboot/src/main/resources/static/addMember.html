@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+	<table width=600 align=center border=1>
+		<tr height=100>
+			<td id="title-placeholder" colspan="2" bgcolor="black"
+				style="opacity: 0.5" align=center></td>
+			<!-- 首頁檔案 -->
+			<!-- <script>
+				$(function() {
+					//put title.html in placeholder
+					
+				});
+			</script> -->
+		</tr>
+		<tr>
+			<td colspan=2 align="center"><h3>新增會員資料</h3></td>
+		</tr>
+
+		<tr>
+			<td>帳號</td>
+			<td><input type="text" name="username"> <input
+				type="button" id="checkUsername" value="驗證帳號"></td>
+
+		</tr>
+		<tr>
+			<td>密碼</td>
+			<!-- 留意檢視密碼可行性 -->
+			<td><input type="password" name="password"></td>
+		</tr>
+		<tr>
+			<td>姓名</td>
+			<td><input type="text" name="name"></td>
+		</tr>
+		<tr>
+			<td>地址</td>
+			<td><input type="text" name="address"></td>
+		</tr>
+		<tr>
+			<td>電話</td>
+			<td><input type="text" name="phone"></td>
+		</tr>
+		<tr>
+			<td>手機</td>
+			<td><input type="text" name="mobile"></td>
+		</tr>
+		<tr>
+			<td colspan=2 align=center><input type="button" id="addForm"
+				value="ok"></td>
+		</tr>
+
+
+
+		<script>
+			$(function() {
+				$("#title-placeholder").load("title.html");
+				//檢查帳號是否重複
+				$("#checkUsername").click(function() {
+					let username = $("input[name='username']").val();
+					if (!username) {
+						alert("請先輸入帳號");
+						return;
+					}//檢查，避免空值
+
+					$.ajax({
+						url : "/api/members/check",
+						type : "GET",
+						data : {
+							username : username
+						},//傳送參數
+						success : function(response) {
+							alert(response);//彈出此帳號可以使用
+						},
+						error : function(xhr) {
+							alert(xhr.responseText);//彈出帳號已存在
+						}
+					});
+				});
+				$
+				//新增帳號
+				$("#addForm").click(function(e) {
+					e.preventDefault(); //防止跳轉
+
+					let memberData = {
+						username : $("input[name='username']").val(),
+						password : $("input[name='password']").val(),
+						name : $("input[name='name']").val(),
+						address : $("input[name='address']").val(),
+						phone : $("input[name='phone']").val(),
+						mobile : $("input[name='mobile']").val()
+					};
+
+					$.ajax({
+						url : "/api/members/register",
+						type : "POST",
+						contentType : "application/json",
+						data : JSON.stringify(memberData),
+						success : function(response) {
+							alert(response);
+							window.location.href = "login.html";
+						},
+						error : function(xhr) {
+							alert(xhr.responseText);
+							window.location.href = "addMember.html";
+						}
+					});
+				});
+			});
+		</script>
+	</table>
+	</form>
+	</table>
+</body>
+</html>

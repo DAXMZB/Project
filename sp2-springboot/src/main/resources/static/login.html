@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body bgcolor="#faebd7">
+	<table width=600 align=center border=1>
+		<tr style="opacity: 0.5;">
+			<td id="title" colspan="2" bgcolor="black" style="opacity: 0.5"
+				align="center"></td>
+			<!-- 首頁檔案 -->
+			<script>
+				$(function() {
+					//put title.html in placeholder
+					$("#title").load("title.html");
+				});
+			</script>
+		</tr>
+		<tr>
+			<td>帳號</td>
+			<td><input type=text name=username placeholder="8位英數帳號"></td>
+		</tr>
+		<tr>
+			<td>密碼</td>
+			<td><input type=password name=password placeholder="8位英數帳號"></td>
+		</tr>
+		<tr>
+			<td colspan=2 align=center><input type=button
+				id="login-submit-btn" value="登入"></td>
+		</tr>
+		<script>
+			$(function() {
+				$("#login-submit-btn").click(function(e) {
+					e.preventDefault();
+					let forData = {
+						username : $("input[name='username']").val(),
+						password : $("input[name='password']").val()
+					};
+					$.ajax({
+						url : "/api/members/login",
+						type : "POST",
+						contentType : "application/json",
+						data : JSON.stringify(forData),
+						success : function(member) {
+							//1.將姓名存入瀏覽器記憶體，這樣重新整理才不會消失
+							sessionStorage.setItem("userName", member.name);
+
+							//2.執行跳轉
+							window.location.href = "index.html";
+						},
+						error : function(xhr) {
+							//如果傳回401，則抓取帳號已重複
+							if (xhr.status === 401) {
+								alert(xhr.responseText);
+							} else {
+								alert("伺服器異常");
+							}
+						}
+					});
+				});
+			});
+		</script>
+	</table>
+
+
+
+</body>
+</html>
