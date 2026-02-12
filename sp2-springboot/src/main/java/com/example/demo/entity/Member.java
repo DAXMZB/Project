@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size; // 必須引入這個包
 
 @Entity // Tell Hibernate this is an Entity
 @Table(name = "member")
@@ -16,6 +17,7 @@ public class Member {
 	@Column(name = "username", length = 50)
 	private String username;
 
+	@Size(min = 8, message = "密碼長度最少為8位")
 	@Column(length = 100)
 	private String password;
 

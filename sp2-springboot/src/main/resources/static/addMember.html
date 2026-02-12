@@ -105,7 +105,7 @@
 							window.location.href = "login.html";
 						},
 						error : function(xhr) {
-							alert(xhr.responseText);
+							alert(xhr.responseText);//預設優先捕捉Controleer @valid 即全域變數
 							window.location.href = "addMember.html";
 						}
 					});

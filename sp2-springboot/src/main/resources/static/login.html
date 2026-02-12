@@ -30,6 +30,9 @@
 			<td colspan=2 align=center><input type=button
 				id="login-submit-btn" value="登入"></td>
 		</tr>
+		<!-- 帳號驗證：透過 memberService.isUsernameExists(username)。因為資料庫已改為 _bin 排序，這步會精確區分大小寫。
+
+			 密碼驗證：在 memberService.login 中，先找出該帳號，再用 passwordEncoder.matches 檢查密碼。 -->
 		<script>
 			$(function() {
 				$("#login-submit-btn").click(function(e) {
@@ -52,11 +55,7 @@
 						},
 						error : function(xhr) {
 							//如果傳回401，則抓取帳號已重複
-							if (xhr.status === 401) {
-								alert(xhr.responseText);
-							} else {
-								alert("伺服器異常");
-							}
+							alert(xhr.responseText); //預設優先捕捉Controleer @valid 即全域變數
 						}
 					});
 				});
